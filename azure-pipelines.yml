@@ -45,6 +45,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(build.artifactStagingDirectory)/output/iphoneos/Release'
+    PathtoPublish: '$(build.artifactStagingDirectory)/output/$(sdk)/$(configuration)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
