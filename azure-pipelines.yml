@@ -48,3 +48,13 @@ steps:
     PathtoPublish: '$(build.artifactStagingDirectory)/output/$(sdk)/$(configuration)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+	
+# App Center distribute
+# Distribute app builds to testers and users via Visual Studio App Center
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'Appcenter-DemoIOSApp'
+    appSlug: 'itops-limitlessmobil.com/Demo-IOS'
+    appFile: '$(build.artifactStagingDirectory)/output/$(sdk)/$(configuration)/TestDemo.ipa'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'Demo Pipelines.'
