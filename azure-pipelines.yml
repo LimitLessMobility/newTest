@@ -31,6 +31,7 @@ steps:
     configuration: 'Release'
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
+    teamId: "W7R7MDY44S"
     exportTeamId: "W7R7MDY44S"
     packageApp: true
 
