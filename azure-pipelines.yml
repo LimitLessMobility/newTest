@@ -17,12 +17,9 @@ steps:
   inputs:
     certSecureFile: 'testCertificate.p12'
     certPwd: '12345678'
-    #keychain: 'temp' # Options: default, temp, custom
-    #keychainPassword: # Required when keychain == Custom || Keychain == Default
-    #customKeychainPath: # Required when keychain == Custom
-    #deleteCert: # Optional
-    #deleteCustomKeychain: # Optional
-    #signingIdentity: # Optional
+    keychain: 'temp' 
+    deleteCert: true
+
 - task: Xcode@5
   inputs:
     actions: 'build'
@@ -30,17 +27,19 @@ steps:
     sdk: 'iphoneos'
     configuration: 'Release'
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-    xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
-    teamId: "W7R7MDY44S"
-    exportTeamId: "W7R7MDY44S"
+    xcodeVersion: 'default' 
     packageApp: true
+    signingOption: manual
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    exportTeamId: "W7R7MDY44S"
 
 - task: CopyFiles@2
   inputs:
     contents: '**/*.ipa'
     targetFolder: '$(build.artifactStagingDirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(build.artifactStagingDirectory)/output/iphoneos/Release'
     ArtifactName: 'drop'
     publishLocation: 'Container'
